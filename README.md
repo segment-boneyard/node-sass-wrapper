@@ -40,15 +40,17 @@
 ### compile(path, [options], callback)
  
   Compile the Sass file at `path` and `callback(err, css)`. `options` are optional and map directly to their command line equivalents:
-
-    {
-      compass   : true,
-      style     : 'nested',
-      precision : 3,
-      loadPath  : null,
-      require   : null
-    }
-
+  
+  ```js
+  {
+    compass   : true,
+    style     : 'nested',
+    precision : 3,
+    loadPath  : null,
+    require   : null
+  }
+  ```
+  
 ## License
 
 MIT
