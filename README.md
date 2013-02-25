@@ -9,40 +9,48 @@
 ## Example
 
   Call `compile` with the path to your Sass stylesheet:
+  
+  ```js
+  var sass = require('node-sass-wrapper');
 
-    var sass = require('node-sass-wrapper');
-
-    sass.compile('path/to/style.sass', function (err, css) {
-      if (err) throw err;
-      fs.writeFileSync('path/to/style.css', css);
-    });
+  sass.compile('path/to/style.sass', function (err, css) {
+    if (err) throw err;
+    fs.writeFileSync('path/to/style.css', css);
+  });
+  ```
 
   You can also pass in options:
 
-    var sass = require('node-sass-wrapper');
+  ```js
+  var sass = require('node-sass-wrapper');
 
-    var options = {
-      compass : true,
-      style   : 'compact'
-    };
+  var options = {
+    compass : true,
+    style   : 'compact'
+  };
 
-    sass.compile('path/to/style.sass', options, function (err, css) {
-      if (err) throw err;
-      fs.writeFileSync('path/to/style.css', css);
-    });
+  sass.compile('path/to/style.sass', options, function (err, css) {
+    if (err) throw err;
+    fs.writeFileSync('path/to/style.css', css);
+  });
+  ```
 
 ## API
   
 ### compile(path, [options], callback)
  
   Compile the Sass file at `path` and `callback(err, css)`. `options` are optional and map directly to their command line equivalents:
-
-    compass
-    style
-    precision
-    loadPath
-    require
-
+  
+  ```js
+  {
+    compass   : true,
+    style     : 'nested',
+    precision : 3,
+    loadPath  : null,
+    require   : null
+  }
+  ```
+  
 ## License
 
 MIT
