@@ -19,8 +19,8 @@ exports.compile = function (stylesheet, options, callback) {
     , random   = Math.floor(Math.random() + new Date().getTime())
     , output   = path.join('/tmp', basename + random + '.css');
 
-  // Make sure the stylesheet exists at the path.
-  path.exists(stylesheet, function (exists) {
+  // Make sure the stylesheet exists.
+  fs.exists(stylesheet, function (exists) {
     if (!exists) callback(new Error("'" + stylesheet + "'  doesn't exist."));
 
     // Push extra options.
