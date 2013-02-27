@@ -31,7 +31,7 @@ exports.compile = function (stylesheet, options, callback) {
     if (options.require)   args.push('--require', options.require);
 
     // Disable the default Sass cache.
-    args.push('--no-cache');
+    // args.push('--no-cache');
 
     // Input + output.
     args.push(stylesheet, output);
