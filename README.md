@@ -43,11 +43,12 @@
   
   ```js
   {
-    compass   : true,
-    style     : 'nested',
-    precision : 3,
+    compass   : false,
     loadPath  : null,
-    require   : null
+    noCache   : false,
+    precision : 3,
+    require   : null,
+    style     : 'nested'
   }
   ```
   
