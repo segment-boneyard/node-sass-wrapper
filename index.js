@@ -24,15 +24,13 @@ exports.compile = function (stylesheet, options, callback) {
 
     // Push extra options.
     if (options.compass)   args.push('--compass');
+    if (options.noCache)   args.push('--no-cache');
     if (options.style)     args.push('--style', options.style);
     if (options.precision) args.push('--precision', options.precision);
     if (options.loadPath)  args.push('--load-path', options.loadPath);
     if (options.require)   args.push('--require', options.require);
 
-    // Disable the default Sass cache.
-    //if (!options.cache)    args.push('--no-cache');
-
-    // Input
+    // Input.
     args.push(stylesheet);
 
     // Run `sass` in a child process.
