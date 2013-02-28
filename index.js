@@ -40,7 +40,7 @@ exports.compile = function (stylesheet, options, callback) {
 
     sass.stdout.setEncoding('utf8');
     sass.stdout.on('data', function (data) {
-      output.push(data);
+      output.push(new Buffer(data));
     });
 
     sass.stderr.setEncoding('utf8');
@@ -51,7 +51,7 @@ exports.compile = function (stylesheet, options, callback) {
     // Read the generated css file on exit.
     sass.on('exit', function (code) {
       if (code !== 0) return callback(new Error('Error exiting: ' + code));
-      return callback(null, Buffer.concat(output));
+      return callback(null, Buffer.concat(output).toString());
     });
   });
 };
