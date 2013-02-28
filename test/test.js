@@ -1,7 +1,7 @@
 
 var assert = require('assert')
   , fs     = require('fs')
-  , sass   = require('./');
+  , sass   = require('../');
 
 sass.compile('./test.sass', { compass : true }, function (err, css) {
 
