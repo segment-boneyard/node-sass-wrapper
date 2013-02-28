@@ -16,8 +16,7 @@ exports.compile = function (stylesheet, options, callback) {
 
   var args     = []
     , basename = path.basename(stylesheet, path.extname(stylesheet))
-    , random   = Math.floor(Math.random() + new Date().getTime())
-    , output   = path.join('/tmp', basename + random + '.css');
+    , output   = '';
 
   // Make sure the stylesheet exists.
   fs.exists(stylesheet, function (exists) {
@@ -31,17 +30,17 @@ exports.compile = function (stylesheet, options, callback) {
     if (options.require)   args.push('--require', options.require);
 
     // Disable the default Sass cache.
-    // args.push('--no-cache');
+    //if (!options.cache)    args.push('--no-cache');
 
-    // Input + output.
-    args.push(stylesheet, output);
+    // Input
+    args.push(stylesheet);
 
     // Run `sass` in a child process.
     var sass = spawn('sass', args);
 
     sass.stdout.setEncoding('utf8');
     sass.stdout.on('data', function (data) {
-      console.log(data.toString());
+      output += data;
     });
 
     sass.stderr.setEncoding('utf8');
@@ -51,11 +50,8 @@ exports.compile = function (stylesheet, options, callback) {
 
     // Read the generated css file on exit.
     sass.on('exit', function (code) {
-      if (code !== 0) return;
-      fs.readFile(output, 'utf8', function (err, data) {
-        if (err) callback(err, null);
-        callback(null, data);
-      });
+      if (code !== 0) return callback(new Error('Error exiting: ' + code));
+      return callback(null, output);
     });
   });
 };
