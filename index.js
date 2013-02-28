@@ -16,7 +16,7 @@ exports.compile = function (stylesheet, options, callback) {
 
   var args     = []
     , basename = path.basename(stylesheet, path.extname(stylesheet))
-    , output   = '';
+    , output   = [];
 
   // Make sure the stylesheet exists.
   fs.exists(stylesheet, function (exists) {
@@ -40,7 +40,7 @@ exports.compile = function (stylesheet, options, callback) {
 
     sass.stdout.setEncoding('utf8');
     sass.stdout.on('data', function (data) {
-      output += data;
+      output.push(data);
     });
 
     sass.stderr.setEncoding('utf8');
@@ -51,7 +51,7 @@ exports.compile = function (stylesheet, options, callback) {
     // Read the generated css file on exit.
     sass.on('exit', function (code) {
       if (code !== 0) return callback(new Error('Error exiting: ' + code));
-      return callback(null, output);
+      return callback(null, Buffer.concat(output));
     });
   });
 };
