@@ -1,6 +1,6 @@
 {
   "name": "node-sass-wrapper",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A wrapper around the command line Sass gem.",
   "keywords": [
     "node",
